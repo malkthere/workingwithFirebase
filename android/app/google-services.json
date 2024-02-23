@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "902056675280",
+    "project_id": "education-example-maz01",
+    "storage_bucket": "education-example-maz01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902056675280:android:a6f60fa182f58328365bd5",
+        "android_client_info": {
+          "package_name": "com.example.tryingfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFeI2D023KK0Wo2LkovVMs73-HCGNUlsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
