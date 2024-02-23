@@ -7,4 +7,7 @@ return await FirebaseFirestore.instance
     .doc(id)
     .set(LecInfoMap);
 }
+Future<Stream<QuerySnapshot>> getData(String CollectionName) async{
+  return await FirebaseFirestore.instance.collection(CollectionName).snapshots();
+}
 }

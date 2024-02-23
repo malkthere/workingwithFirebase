@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:random_string/random_string.dart';
 import 'package:tryingfirebase/dbfirebase.dart';
+import 'package:tryingfirebase/showdata.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -238,6 +239,24 @@ class _MyHomePageState extends State<MyHomePage> {
                               lecCol.text="";
                               lecDept.text="";
                               lecPhNo.text="";
+
+                            }
+                        ),
+                        ElevatedButton(
+
+                            child: Text(
+                              "صفحة العرض",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            onPressed: () async{
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Showdata(),
+                                ),
+                              );
 
                             }
                         ),
