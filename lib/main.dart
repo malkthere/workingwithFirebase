@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:random_string/random_string.dart';
 import 'package:tryingfirebase/dbfirebase.dart';
+import 'package:tryingfirebase/exceldataupload.dart';
 import 'package:tryingfirebase/showdata.dart';
 
 void main() async{
@@ -91,191 +92,207 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-             Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    "إضافة منتجات للفاتورة ",
-                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "إضافة منتجات للفاتورة ",
-                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                  ),
-                  //styling
-                  TextFormField(
-                    controller: lecName,
-                    decoration: InputDecoration(labelText: 'اسم المحاضر'),
-                    keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (value) {
-
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Enter a valid email!';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: lecCol,
-                    decoration: InputDecoration(labelText: 'كلية'),
-                    keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (value) {
-                      //Validator
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Enter a valid email!';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: lecDept,
-                    decoration: InputDecoration(labelText: 'مدرس بقسم'),
-                    keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (value) {
-                      //Validator
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty)
-                      {
-                        return 'Enter a valid email!';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: lecPhNo,
-                    decoration: InputDecoration(labelText: 'رقم الهاتف'),
-                    keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (value) {
-                      //Validator
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty)
-                      {
-                        return 'Enter a valid email!';
-                      }
-                      return null;
-                    },
-                  ),
-                  //box styling
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  //text input
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  FittedBox(
-                    child: Row(
-                      children: [
-                        ElevatedButton(
-
-                            child: Text(
-                              "تسجيل",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            onPressed: () async{
-
-                              String id =randomAlphaNumeric(10);
-                              // _submit();
-                              Map<String, dynamic> lecInfoMap={
-                                "lecName":lecName.text,
-                                "ID":id,
-                                "lecCol":lecCol.text,
-                                "lecDept":lecDept.text,
-                                "lecPhNo":lecPhNo.text,
-                              };
-                              await Databasemethods().addData(lecInfoMap, id).then((value) {
-                                Fluttertoast.showToast(
-                                    msg: "Lecturer infor have been added successfully ",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.red,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                );
-                              });
-                              //await dbobj.addData(LecInfoMap, id)
-
-                              //costname.text="";
-                              lecName.text="";
-                              lecCol.text="";
-                              lecDept.text="";
-                              lecPhNo.text="";
-
-                            }
-                        ),
-                        ElevatedButton(
-
-                            child: Text(
-                              "صفحة العرض",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            onPressed: () async{
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Showdata(),
-                                ),
-                              );
-
-                            }
-                        ),
+        appBar: AppBar(
+     // TRY THIS: Try changing the color here to a specific color (to
+     // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+     // change color while the other colors stay the same.
+     backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+     // Here we take the value from the MyHomePage object that was created by
+     // the App.build method, and use it to set our appbar title.
+     title: Text(widget.title),
 
 
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        body: Center(
+     // Center is a layout widget. It takes a single child and positions it
+     // in the middle of the parent.
+     child: Column(
+       // Column is also a layout widget. It takes a list of children and
+       // arranges them vertically. By default, it sizes itself to fit its
+       // children horizontally, and tries to be as tall as its parent.
+       //
+       // Column has various properties to control how it sizes itself and
+       // how it positions its children. Here we use mainAxisAlignment to
+       // center the children vertically; the main axis here is the vertical
+       // axis because Columns are vertical (the cross axis would be
+       // horizontal).
+       //
+       // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+       // action in the IDE, or press "p" in the console), to see the
+       // wireframe for each widget.
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: <Widget>[
+          Form(
+           key: _formKey,
+           child: Column(
+             children: <Widget>[
+               Text(
+                 "إضافة منتجات للفاتورة ",
+                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+               ),
+               Text(
+                 "إضافة منتجات للفاتورة ",
+                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+               ),
+               //styling
+               TextFormField(
+                 controller: lecName,
+                 decoration: InputDecoration(labelText: 'اسم المحاضر'),
+                 keyboardType: TextInputType.emailAddress,
+                 onFieldSubmitted: (value) {
+
+                 },
+                 validator: (value) {
+                   if (value!.isEmpty) {
+                     return 'Enter a valid email!';
+                   }
+                   return null;
+                 },
+               ),
+               TextFormField(
+                 controller: lecCol,
+                 decoration: InputDecoration(labelText: 'كلية'),
+                 keyboardType: TextInputType.emailAddress,
+                 onFieldSubmitted: (value) {
+                   //Validator
+                 },
+                 validator: (value) {
+                   if (value!.isEmpty) {
+                     return 'Enter a valid email!';
+                   }
+                   return null;
+                 },
+               ),
+               TextFormField(
+                 controller: lecDept,
+                 decoration: InputDecoration(labelText: 'مدرس بقسم'),
+                 keyboardType: TextInputType.emailAddress,
+                 onFieldSubmitted: (value) {
+                   //Validator
+                 },
+                 validator: (value) {
+                   if (value!.isEmpty)
+                   {
+                     return 'Enter a valid email!';
+                   }
+                   return null;
+                 },
+               ),
+               TextFormField(
+                 controller: lecPhNo,
+                 decoration: InputDecoration(labelText: 'رقم الهاتف'),
+                 keyboardType: TextInputType.emailAddress,
+                 onFieldSubmitted: (value) {
+                   //Validator
+                 },
+                 validator: (value) {
+                   if (value!.isEmpty)
+                   {
+                     return 'Enter a valid email!';
+                   }
+                   return null;
+                 },
+               ),
+               //box styling
+               SizedBox(
+                 height: MediaQuery.of(context).size.width * 0.1,
+               ),
+               //text input
+
+               SizedBox(
+                 height: MediaQuery.of(context).size.width * 0.1,
+               ),
+               FittedBox(
+                 child: Row(
+                   children: [
+                     ElevatedButton(
+
+                         child: Text(
+                           "تسجيل",
+                           style: TextStyle(
+                             fontSize: 16.0,
+                           ),
+                         ),
+                         onPressed: () async{
+
+                           String id =randomAlphaNumeric(10);
+                           // _submit();
+                           Map<String, dynamic> lecInfoMap={
+                             "lecName":lecName.text,
+                             "ID":id,
+                             "lecCol":lecCol.text,
+                             "lecDept":lecDept.text,
+                             "lecPhNo":lecPhNo.text,
+                           };
+                           await Databasemethods().addLecData(lecInfoMap, id).then((value) {
+                             Fluttertoast.showToast(
+                                 msg: "Lecturer infor have been added successfully ",
+                                 toastLength: Toast.LENGTH_SHORT,
+                                 gravity: ToastGravity.CENTER,
+                                 timeInSecForIosWeb: 1,
+                                 backgroundColor: Colors.red,
+                                 textColor: Colors.white,
+                                 fontSize: 16.0
+                             );
+                           });
+                           //await dbobj.addData(LecInfoMap, id)
+
+                           //costname.text="";
+                           lecName.text="";
+                           lecCol.text="";
+                           lecDept.text="";
+                           lecPhNo.text="";
+
+                         }
+                     ),
+                     ElevatedButton(
+                         child: Text(
+                           "صفحة العرض",
+                           style: TextStyle(
+                             fontSize: 16.0,
+                           ),
+                         ),
+                         onPressed: () async{
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => Showdata(),
+                             ),
+                           );
+                         }
+                     ),
+                     ElevatedButton(
+                         child: Text(
+                           "رفع البيانات من ملف اكسل",
+                           style: TextStyle(
+                             fontSize: 16.0,
+                           ),
+                         ),
+                         onPressed: () async{
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => Uploadexcel(),
+                             ),
+                           );
+                         }
+                     ),
+
+
+                   ],
+                 ),
+               ),
+             ],
+           ),
+         ),
+       ],
+     ),
+        ),
+        floatingActionButton: FloatingActionButton(
+     onPressed: _incrementCounter,
+     tooltip: 'Increment',
+     child: const Icon(Icons.add),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

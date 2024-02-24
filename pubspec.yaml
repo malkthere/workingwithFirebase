@@ -41,6 +41,13 @@ dependencies:
   random_string:
   fluttertoast:
   permission_handler:
+  excel:
+  file_picker:
+  flutter_excel:
+  sqflite:
+  path:
+
+
 
 
 dev_dependencies:
