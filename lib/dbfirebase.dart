@@ -18,4 +18,8 @@ return await FirebaseFirestore.instance
 Future<Stream<QuerySnapshot>> getData(String CollectionName) async{
   return await FirebaseFirestore.instance.collection(CollectionName).snapshots();
 }
+
+Future<Stream<QuerySnapshot>> getselectedData(String CollectionName,String docname,String docvalue) async{
+  return await FirebaseFirestore.instance.collection(CollectionName).where(docname, isEqualTo: docvalue).snapshots();
+}
 }

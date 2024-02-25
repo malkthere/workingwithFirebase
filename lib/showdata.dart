@@ -2,31 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tryingfirebase/dbfirebase.dart';
 import 'package:flutter/material.dart';
 class Showdata extends StatefulWidget {
-  const Showdata({super.key});
-
+  const Showdata({super.key,required this.LecturerStream});
+  final Stream?  LecturerStream;
   @override
-  State<Showdata> createState() => ShowdataState();
+  State<Showdata> createState() => ShowdataState(LecturerStream);
 }
-class Product {
-  final String costname;
-  final String proname;
-  final String quantaty;
-  final String price;
-  final int total;
 
-  Product(this.costname, this.proname, this.quantaty, this.price, this.total);
-
-
-}
 class ShowdataState extends  State<Showdata> {
+   ShowdataState(this.LecturerStream);
+  late final Stream?  LecturerStream;
  // SellproductsState({Key? key}) ;
  // SellproductsState({Key? key});//, required this.item}) : super(key: key);
 
 
 
-  Stream? LecturerStream;
+//  Stream? LecturerStream;
   getontheload() async{
-    LecturerStream=await Databasemethods().getData("lecturer");
+    if (await LecturerStream!.isEmpty){
+      LecturerStream=await Databasemethods().getData("lecturer");
+    }
+
     setState(() {
 
     });

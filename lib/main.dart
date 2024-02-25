@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:random_string/random_string.dart';
 import 'package:tryingfirebase/dbfirebase.dart';
 import 'package:tryingfirebase/exceldataupload.dart';
+import 'package:tryingfirebase/searchdata.dart';
 import 'package:tryingfirebase/showdata.dart';
 
 void main() async{
@@ -206,7 +207,6 @@ class _MyHomePageState extends State<MyHomePage> {
                  child: Row(
                    children: [
                      ElevatedButton(
-
                          child: Text(
                            "تسجيل",
                            style: TextStyle(
@@ -256,7 +256,23 @@ class _MyHomePageState extends State<MyHomePage> {
                            Navigator.push(
                              context,
                              MaterialPageRoute(
-                               builder: (context) => Showdata(),
+                               builder: (context) => Showdata(LecturerStream:null),
+                             ),
+                           );
+                         }
+                     ),
+                     ElevatedButton(
+                         child: Text(
+                           "صفحة البحث",
+                           style: TextStyle(
+                             fontSize: 16.0,
+                           ),
+                         ),
+                         onPressed: () async{
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => Searchdata(),
                              ),
                            );
                          }
