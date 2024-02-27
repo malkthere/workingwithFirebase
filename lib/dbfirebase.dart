@@ -22,4 +22,8 @@ Future<Stream<QuerySnapshot>> getData(String CollectionName) async{
 Future<Stream<QuerySnapshot>> getselectedData(String CollectionName,String docname,String docvalue) async{
   return await FirebaseFirestore.instance.collection(CollectionName).where(docname, isEqualTo: docvalue).snapshots();
 }
+Future updateData(Map<String, dynamic> ListMap, String id, String CollectionName)async{
+  return await FirebaseFirestore.instance.collection(CollectionName).doc(id).update(ListMap);
+
+}
 }
