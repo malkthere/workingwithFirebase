@@ -62,18 +62,42 @@ return Material(
         children: [
           FittedBox(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("name : "+ds["lecName"],style:TextStyle(color: Colors.blue,fontSize: 20.0, fontWeight: FontWeight.bold) ),
-              GestureDetector(
+            // Spacer(),
+                SizedBox(width: 20.0),
+
+                GestureDetector(
                   onTap: (){
+
                     lecName.text=ds["lecName"];
                     lecCol.text=ds["lecCol"];
                     lecPhNo.text=ds["lecPhNo"];
                       lecDept.text=ds["lecDept"];
                     editLecturerInfo(ds["ID"]);
                   },
-                  child: Icon(Icons.edit, color: Colors.amber))
+                  child: Icon(Icons.edit, color: Colors.amber)),
+                SizedBox(width: 20.0),
+                GestureDetector(
+                    onTap: ()async{
+
+                      await Databasemethods().deleteData(ds["ID"],"lecturer").then((value) {
+                        Fluttertoast.showToast(
+                            msg: "تم حذف البيانات ",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0
+                        );
+                        setState(() {
+
+                        });
+                      });
+                    },
+                      child: Icon(Icons.delete, color: Colors.red)),
+
               ],
             ),
           ),

@@ -26,4 +26,8 @@ Future updateData(Map<String, dynamic> ListMap, String id, String CollectionName
   return await FirebaseFirestore.instance.collection(CollectionName).doc(id).update(ListMap);
 
 }
+Future deleteData(String id, String CollectionName)async{
+  return await FirebaseFirestore.instance.collection(CollectionName).doc(id).delete();
+
+}
 }
