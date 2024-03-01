@@ -7,6 +7,7 @@ import 'package:tryingfirebase/dbfirebase.dart';
 import 'package:tryingfirebase/exceldataupload.dart';
 import 'package:tryingfirebase/searchdata.dart';
 import 'package:tryingfirebase/showdata.dart';
+import 'package:tryingfirebase/uploadimages.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -289,6 +290,22 @@ class _MyHomePageState extends State<MyHomePage> {
                              context,
                              MaterialPageRoute(
                                builder: (context) => Uploadexcel(),
+                             ),
+                           );
+                         }
+                     ),
+                     ElevatedButton(
+                         child: Text(
+                           "رفع صورة",
+                           style: TextStyle(
+                             fontSize: 16.0,
+                           ),
+                         ),
+                         onPressed: () async{
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => Uploadimage(),
                              ),
                            );
                          }

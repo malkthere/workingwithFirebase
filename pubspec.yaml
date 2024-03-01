@@ -46,6 +46,8 @@ dependencies:
   flutter_excel:
   sqflite:
   path:
+  firebase_storage:
+  image_picker:
 
 
 
